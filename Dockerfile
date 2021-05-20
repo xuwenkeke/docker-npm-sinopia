@@ -17,6 +17,6 @@ USER sinopia
 ADD --chown=sinopia:sinopia /config.yaml /tmp/config.yaml
 ADD --chown=sinopia:sinopia /start.sh /opt/sinopia/start.sh
 
-CMD ["/opt/sinopia/start.sh"]
+ENTRYPOINT ["sh", "/opt/sinopia/start.sh"]
 EXPOSE 4873
 VOLUME /opt/sinopia

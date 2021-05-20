@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 if [ ! -f config.yaml ]; then
   cp /tmp/config.yaml /opt/sinopia/config.yaml
 fi
