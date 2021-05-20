@@ -39,6 +39,5 @@ jobs:
       -
         name: Test
         run: |
-          docker run --name sinopia -d -p 4873:4873 ${{ env.DOCKER_HUB_TAG }}
-          docker logs sinopia
-          sleep 30 && curl -v http://localhost:4873/
+          docker run --platform linux/arm64 --name sinopia -d -p 4873:4873 ${{ env.DOCKER_HUB_TAG }}
+          sleep 30 && docker logs sinopia && curl -v http://localhost:4873/
