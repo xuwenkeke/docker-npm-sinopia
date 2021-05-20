@@ -2,8 +2,8 @@ name: Build Sinopia Docker images
 on:
   push:
     branches: [ main ]
-  schedule:
-    - cron:  '0 6 * * *'
+#  schedule:
+#    - cron:  '0 6 * * *'
 
 env:
   DOCKER_HUB_TAG: xuwenkeke/npm-sinopia
