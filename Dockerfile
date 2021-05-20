@@ -2,8 +2,11 @@ FROM node
 
 LABEL MAINTAINER="zhangxiong@wondersgroup.com"
 
-RUN adduser --disabled-password --gecos "" sinopia && \
-    mkdir -p /opt/sinopia/storage
+RUN adduser --disabled-password --gecos '' --shell /bin/bash --home /sinopia sinopia && \
+  adduser sinopia sudo && \
+  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+  mkdir -vp /opt/sinopia/storage
+
 
 WORKDIR /opt/sinopia
 RUN npm install js-yaml sinopia && \
@@ -11,10 +14,8 @@ RUN npm install js-yaml sinopia && \
 
 USER sinopia
 
-ADD /config.yaml /tmp/config.yaml
-ADD /start.sh /opt/sinopia/start.sh
-
-RUN chmod +x opt/sinopia/start.sh
+ADD --chown=sinopia:sinopia /config.yaml /tmp/config.yaml
+ADD --chown=sinopia:sinopia /start.sh /opt/sinopia/start.sh
 
 CMD ["/opt/sinopia/start.sh"]
 EXPOSE 4873
