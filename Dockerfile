@@ -1,4 +1,4 @@
-FROM node:0.10
+FROM node:slim
 
 LABEL MAINTAINER="zhangxiong@wondersgroup.com"
 
