@@ -1,21 +1,19 @@
-FROM node:16
+FROM node
 
 LABEL MAINTAINER="zhangxiong@wondersgroup.com"
 
-RUN adduser --disabled-password --gecos '' --shell /bin/bash --home /sinopia sinopia && \
-  adduser sinopia sudo && \
-  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN adduser --disabled-password --gecos "" sinopia && \
+    mkdir -p /opt/sinopia/storage
+
+WORKDIR /opt/sinopia
+RUN npm install js-yaml sinopia && \
+    chown -R sinopia:sinopia /opt/sinopia
 
 USER sinopia
 
-RUN git clone --depth 1 https://github.com/xuwenkeke/sinopia  /sinopia/registry
+ADD /config.yaml /tmp/config.yaml
+ADD /start.sh /opt/sinopia/start.sh
 
-ADD config.yaml /sinopia/registry/config.yaml
-
-WORKDIR /sinopia/registry
-
-RUN npm install --production && npm cache clean --force
-
-VOLUME /sinopia/storage
+CMD ["/opt/sinopia/start.sh"]
 EXPOSE 4873
-CMD ["./bin/sinopia"]
+VOLUME /opt/sinopia
