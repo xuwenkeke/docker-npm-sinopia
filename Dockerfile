@@ -14,7 +14,7 @@ ADD config.yaml /sinopia/registry/config.yaml
 
 WORKDIR /sinopia/registry
 
-RUN npm install --production && npm cache clean
+RUN npm install --production && npm cache clean && chmod +x /bin/sinopia
 
 VOLUME /sinopia/storage
 EXPOSE 4873
