@@ -5,7 +5,8 @@ LABEL MAINTAINER="zhangxiong@wondersgroup.com"
 RUN adduser --disabled-password --gecos '' --shell /bin/bash --home /sinopia sinopia && \
   adduser sinopia sudo && \
   echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-  mkdir -vp /opt/sinopia/storage
+  mkdir -vp /opt/sinopia/storage && \
+  apt-get update && apt-get install curl -y
 
 
 WORKDIR /opt/sinopia
