@@ -40,4 +40,4 @@ jobs:
         name: Test
         run: |
           docker run --platform linux/arm64 --name sinopia -d -p 4873:4873 ${{ env.DOCKER_HUB_TAG }}
-          sleep 5s && curl -v http://localhost:4873/
+          sleep 5s && docker logs sinopia && curl -v http://localhost:4873/
